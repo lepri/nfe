@@ -46,7 +46,7 @@ def __processo(company):
     p.versao = '2.00' if (company.nfe_version == '200') else '1.10'
     p.estado = company.partner_id.l10n_br_city_id.state_id.code
     p.certificado.stream_certificado = base64.decodestring(company.nfe_a1_file)
-    p.certificado.senha = company.nfe_a1_password
+    p.certificado.senha = company.nfe_a1_password.encode('utf-8')
     p.salva_arquivos      = True
     p.contingencia_SCAN   = False
     p.caminho = company.nfe_export_folder
