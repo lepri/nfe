@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ###############################################################################
 #                                                                             #
-# Copyright (C) 2013  Renato Lima - Akretion                                  #
+# Copyright (C) 2014  Luis Felipe Mileo - KMEE, www.kmee.com.br               #
 #                                                                             #
 #This program is free software: you can redistribute it and/or modify         #
 #it under the terms of the GNU Affero General Public License as published by  #
@@ -17,19 +17,4 @@
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.        #
 ###############################################################################
 
-import re
-import string
-from datetime import datetime
-
-from openerp import pooler
-from openerp.osv import orm
-from openerp.tools.translate import _
-from openerp.addons.l10n_br_account_product.sped.nfe.document import NFe200
-
-from pysped.nfe.leiaute import NFe_200, Det_200, NFRef_200, Dup_200
-
-
-class NFe200(NFe200):
-
-    def __init__(self):
-        super(NFe200, self).__init__()
+import nfe_xml_periodic_export

@@ -18,4 +18,4 @@
 ###############################################################################
 
 import account_invoice
-import res_company
+import wizard

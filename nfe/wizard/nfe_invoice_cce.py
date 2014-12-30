@@ -19,13 +19,12 @@
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.        #
 ###############################################################################
 
-from openerp.osv import osv, fields, orm
+from openerp.osv import fields, orm
 from openerp.tools.translate import _
 from nfe.sped.nfe.processing.xml import send_correction_letter
-from datetime import datetime
-import os
 
-class NfeInvoiceCce(osv.osv_memory):
+class NfeInvoiceCce(orm.TransientModel):
+
     _name='nfe.invoice_cce'
     
     _columns = {
@@ -49,7 +48,7 @@ class NfeInvoiceCce(osv.osv_memory):
             context = {}
             
         correcao = self.browse(cr, uid, ids)[0].mensagem
-         
+
         obj_invoice = self.pool.get('account.invoice')
         obj_cce = self.pool.get('l10n_br_account.invoice.cce')
         invoice_ids = context and context.get('active_ids') or []
@@ -62,10 +61,9 @@ class NfeInvoiceCce(osv.osv_memory):
             event_obj = self.pool.get('l10n_br_account.document_event')
             domain = [('invoice_id', '=', invoice.id)] 
             sequencia = len(obj_cce.search(cr, uid, domain ))+1
-            results = []   
+            results = []
             try:
-                os.environ['TZ'] = 'America/Sao_Paulo' #FIXME: context.get('tz') ou Colocar o campo tz no cadastro da empresa.
-                processo = send_correction_letter(company, chave_nfe, sequencia, correcao) 
+                processo = send_correction_letter(company, chave_nfe, sequencia, correcao)
                 vals = {
                             'type': str(processo.webservice),
                             'status': processo.resposta.retEvento[0].infEvento.cStat.valor,
@@ -78,7 +76,8 @@ class NfeInvoiceCce(osv.osv_memory):
                             'state': 'done',
                             'document_event_ids': invoice.id}
                 results.append(vals)
-                            
+                obj_invoice.attach_file_event(cr, uid, invoice_ids, sequencia, 'cce', 'xml', context)
+
             except Exception as e:
                 vals = {
                         'type': '-1',
@@ -94,7 +93,6 @@ class NfeInvoiceCce(osv.osv_memory):
                     }
                 results.append(vals)
             finally:
-                os.environ['TZ'] = 'UTC'
                 for result in results:
                     event_obj.create(cr, uid, result)               
                     obj_cce.create(cr,uid, 
