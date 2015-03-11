@@ -1,26 +1,26 @@
 # -*- encoding: utf-8 -*-
-###############################################################################
-#                                                                             #
-# Copyright (C) 2014  KMEE - www.kmee.com.br - Luis Felipe Miléo              #
-#                                                                             #
-#This program is free software: you can redistribute it and/or modify         #
-#it under the terms of the GNU Affero General Public License as published by  #
-#the Free Software Foundation, either version 3 of the License, or            #
-#(at your option) any later version.                                          #
-#                                                                             #
-#This program is distributed in the hope that it will be useful,              #
-#but WITHOUT ANY WARRANTY; without even the implied warranty of               #
-#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                #
-#GNU General Public License for more details.                                 #
-#                                                                             #
-#You should have received a copy of the GNU General Public License            #
-#along with this program.  If not, see <http://www.gnu.org/licenses/>.        #
-###############################################################################
+################################################################################
+#                                                                              #
+# Copyright (C) 2014  KMEE - www.kmee.com.br - Luis Felipe Miléo               #
+#                                                                              #
+# This program is free software: you can redistribute it and/or modify         #
+# it under the terms of the GNU Affero General Public License as published by  #
+# the Free Software Foundation, either version 3 of the License, or            #
+# (at your option) any later version.                                          #
+#                                                                              #
+# This program is distributed in the hope that it will be useful,              #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of               #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                #
+# GNU General Public License for more details.                                 #
+#                                                                              #
+# You should have received a copy of the GNU General Public License            #
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.        #
+################################################################################
 
 import os
 import base64
 import commands
-from openerp.osv import osv,orm, fields
+from openerp.osv import osv, orm, fields
 from openerp.tools.translate import _
 from openerp.addons.nfe.sped.nfe.processing.xml import monta_caminho_nfe, monta_caminho_inutilizacao
 
@@ -116,7 +116,6 @@ class AccountInvoice(orm.Model):
 
         return True
 
-
     def action_invoice_sent(self, cr, uid, ids, context=None):
         
         assert len(ids) == 1, 'This option should only be used for a single id at a time.'
@@ -168,5 +167,5 @@ class res_company(osv.Model):
     _inherit = 'res.company'
 
     _columns = {
-    'nfe_email': fields.text('Observação em Email NFe'),
-            }
+        'nfe_email': fields.text('Observação em Email NFe'),
+        }

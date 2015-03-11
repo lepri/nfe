@@ -41,10 +41,3 @@ class XMLValidator(object):
         nfe.set_xml(nfe_xml)
 
         return nfe.validar()
-
-
-
-
-
-
-

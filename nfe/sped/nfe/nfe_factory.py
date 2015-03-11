@@ -25,7 +25,7 @@ class NfeFactory(object):
     def get_nfe(self, nfe_version):
         """
         Retorna objeto NFe de acordo com a versao de NFe em uso no OpenERP
-        :param company: objeto res.company
+        :param nfe_version:
         :return: Objeto Nfe
         """
         if nfe_version == '3.10':
@@ -35,10 +35,3 @@ class NfeFactory(object):
             from openerp.addons.l10n_br_account_product.sped.nfe.document import NFe200
             nfe_obj = NFe200()
         return nfe_obj
-
-
-
-
-
-
-

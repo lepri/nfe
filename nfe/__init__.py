@@ -23,4 +23,4 @@ import l10n_br_account
 import res_company
 import res_partner
 import wizard
-
+import report
